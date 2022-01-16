@@ -7,13 +7,17 @@ class App extends Component {
  state = {
   contacts: ['Oleg', 'Vitaliy'],
   name: '',
-  // number: ''
+  number: ''
   }
   
   deleteContact = contactId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact !== contactId)
     }));
+  };
+
+  handleNameChange = event => {
+    this.setState({ name: event.currentTarget.value });
   };
   
   render() {
@@ -22,10 +26,16 @@ class App extends Component {
     return (
       <div>
         <h1>Phonebook</h1>
-         <ContactForm />
+        <ContactForm
+          value={this.state.name}
+          onChange={this.handleNameChange}
+        />
         
         <h2>Contacts</h2>
-        <ContactList contacts={contacts} onDeleteContact={this.deleteContact}/> 
+        <ContactList
+          contacts={contacts}
+          onDeleteContact={this.deleteContact}
+        /> 
     </div>
     )}
 }
