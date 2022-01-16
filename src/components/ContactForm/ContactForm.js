@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const ContactForm = () => (
+const ContactForm = ( ) => (
   <div>
     <p>Name</p>
       <input

@@ -5,10 +5,16 @@ import ContactList from './components/ContactList';
 
 class App extends Component {
  state = {
-  contacts: [],
+  contacts: ['Oleg', 'Vitaliy'],
   name: '',
   // number: ''
-}
+  }
+  
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact !== contactId)
+    }));
+  };
   
   render() {
     const { contacts } = this.state
@@ -19,7 +25,7 @@ class App extends Component {
          <ContactForm />
         
         <h2>Contacts</h2>
-        <ContactList contacts={contacts} /> 
+        <ContactList contacts={contacts} onDeleteContact={this.deleteContact}/> 
     </div>
     )}
 }
