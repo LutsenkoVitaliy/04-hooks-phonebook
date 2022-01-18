@@ -3,9 +3,9 @@ import './ContactList.css'
 
 const ContactList = ({ contacts, onDeleteContact }) => (
   <ul className="ContactList">{contacts.map(contact =>
-  <li key={contact} className="ContactList__item">
-    <p className="ContactList__text">{contact}</p>
-      <button onClick={() => onDeleteContact(contact)} className="ContactList__button">deleted</button>
+  <li key={contact.id} className="ContactList__item">
+      <p className="ContactList__text">{contact.name}: {contact.number}</p>
+      <button onClick={() => onDeleteContact(contact.id)} className="ContactList__button">deleted</button>
   </li>)}</ul>       
 );
   
