@@ -16,19 +16,21 @@ class App extends Component {
     }));
   };
 
-  handleNameChange = event => {
-    this.setState({ name: event.currentTarget.value });
-  };
-  
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
+    this.setState({ [name]: value})
+  }
+
   render() {
-    const { contacts } = this.state
+    const { contacts, name, number } = this.state
     
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm
-          value={this.state.name}
-          onChange={this.handleNameChange}
+          nameValue={name}
+          onChange={this.handleChange}
+          numberValue={number}
         />
         
         <h2>Contacts</h2>
