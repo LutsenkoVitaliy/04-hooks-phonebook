@@ -1,4 +1,22 @@
-.addContact__button {
-  margin-top: 10px;
+.contactform_wrap {
   display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+  border: 2px solid #4caf50;
+}
+.lable_form {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 15px;
+}
+.addContact__button {
+  padding: 10px;
+  margin: 10px auto;
+  width: 100px;
+  font-size: 10px;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }

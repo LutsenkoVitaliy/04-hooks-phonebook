@@ -14,5 +14,10 @@
 }
 
 .ContactList__button {
+  margin-left: 15px;
+  width: 80px;
+  cursor: pointer;
   border-radius: 50px;
+  border: none;
+  background-color: #f44336;
 }

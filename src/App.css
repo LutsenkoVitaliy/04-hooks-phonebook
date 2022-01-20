@@ -1,0 +1,9 @@
+.phonebook_wrap {
+  margin: 0 auto;
+  width: 400px;
+}
+
+.phonebook_wrap > h1,
+h2 {
+  text-align: center;
+}
