@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import './App.css'
@@ -6,20 +6,21 @@ import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter'
 
-class App extends Component {
- state = {
-   contacts: [
-    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-   ],
-   filter: ''
-  }
-  
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+export default function App () {
+  const [contacts, setContacts] = useState(() => {
+    return JSON.parse(window.localStorage.getItem('contact')) ?? []
+    // изначальное состояние констактов с localstorage
+  });
+  const [filter, setFilter] = useState('');
+
+  // deleteContact = contactId => {
+  // this.setState(prevState => ({
+  //   contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+  //   }));
+  // };
+  const deleteContact = contactId => {
+  this.setState(prevState => ({
+    contacts: prevState.contacts.filter(contact => contact.id !== contactId)
     }));
   };
 
@@ -58,16 +59,20 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts)
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
-  }
 
-  render() {
-    const { filter } = this.state
-    const visibleContacts = this.getVisibleContacts();
-    
-    return (
+
+
+
+  //   componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.contacts !== prevState.contacts)
+  //   localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+  // }
+  useEffect(() => {
+    window.localStorage.setItem('contacts', JSON.stringify(contacts))
+  },[contacts])
+  
+
+  return (
       <div className='phonebook_wrap'>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitHandler}/>
@@ -79,8 +84,9 @@ class App extends Component {
           onDeleteContact={this.deleteContact}
         /> 
     </div>
-    )}
+    )
 }
 
 
-export default App;
+
+
