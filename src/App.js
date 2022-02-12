@@ -8,7 +8,7 @@ import Filter from './components/Filter'
 
 export default function App () {
   const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contact')) ?? []
+    return JSON.parse(localStorage.getItem('contacts')) ?? []
     // изначальное состояние констактов с localstorage вместо :
     // componentDidMount () {
     //   const contacts = localStorage.getItem('contacts')
@@ -25,10 +25,8 @@ export default function App () {
   //   contacts: prevState.contacts.filter(contact => contact.id !== contactId)
   //   }));
   // };
-  const deleteContact = contactId => {
-  this.setState(prevState => ({
-    contacts: prevState.contacts.filter(contact => contact.id !== contactId)
-    }));
+  const deleteContact = (contactId) => {
+    setContacts(contacts.filter(contact => contact.id !== contactId))
   };
 
   
@@ -46,23 +44,20 @@ export default function App () {
   // }
   const formSubmitHandler = (name, number) => {
     const normalazedFind = name.toLowerCase()
-    const findName = this.state.contacts.find( contact => contact.name.toLowerCase() === normalazedFind );
+    const findName = contacts.find( contact => contact.name.toLowerCase() === normalazedFind );
     if (findName) {
       return alert(`${name} is already in contacts.`);
     }
-
-    this.setState(({contacts}) => ({
-      contacts: [{ name, number, id: nanoid() }, ...contacts],
-    }));
+    setContacts([{ name, number, id: nanoid() }, ...contacts])
   }
 
   //  changeFilter = e => {
   //   const { name, value } = e.currentTarget;
   //   this.setState({ [name]: value })
   // };
-   const changeFilter = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value })
+  const changeFilter = e => {
+     console.log(e.target);
+    setFilter(e.currentTarget.value)
   };
   
   // getVisibleContacts = () => {
@@ -72,7 +67,6 @@ export default function App () {
   //     contact.name.toLowerCase().includes(normalizedFilter),
   //   )};
   const getVisibleContacts = () => {
-    const { filter, contacts } = this.state
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact => 
       contact.name.toLowerCase().includes(normalizedFilter),
@@ -84,7 +78,7 @@ export default function App () {
   //   localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
   // }
   useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts))
+    localStorage.setItem('contacts', JSON.stringify(contacts))
   },[contacts])
   
 
